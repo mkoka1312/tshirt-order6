@@ -91,7 +91,7 @@
 <body>
   <header>
     <h1>Твоя идея — наша футболка</h1>
-    <p>Загрузи свой эскиз, выбери расположение принта и отправь заказ</p>
+    <p>Загрузи свой эскиз, выбери цвет и расположение принта, отправь заказ</p>
   </header>
 
   <form action="https://formsubmit.co/mkoka098@gmail.com" method="POST" enctype="multipart/form-data">
@@ -100,6 +100,19 @@
 
     <label for="email">Email</label>
     <input type="email" id="email" name="email" required>
+
+    <label for="side">Сторона футболки</label>
+    <select id="side" name="side" onchange="updateShirtView()">
+      <option value="front">Передняя сторона</option>
+      <option value="back">Задняя сторона</option>
+    </select>
+
+    <label for="color">Цвет футболки</label>
+    <select id="color" name="color" onchange="updateShirtView()">
+      <option value="white">Белая</option>
+      <option value="gray">Серая</option>
+      <option value="black">Чёрная</option>
+    </select>
 
     <label for="placement">Расположение принта</label>
     <select id="placement" name="placement" onchange="updatePrintPosition()">
@@ -124,7 +137,7 @@
   </form>
 
   <div class="preview">
-    <img id="shirt" src="https://i.ibb.co/mDR9hxP/tshirt-flat.png" alt="Футболка">
+    <img id="shirt" src="https://i.ibb.co/MP2JqK5/white-front.png" alt="Футболка">
     <img id="print-preview" alt="Принт превью">
   </div>
 
@@ -133,8 +146,10 @@
   </footer>
 
   <script>
+    const shirtImage = document.getElementById('shirt');
+    const print = document.getElementById('print-preview');
+
     function previewPrint(event) {
-      const print = document.getElementById('print-preview');
       const file = event.target.files[0];
       if (file) {
         const reader = new FileReader();
@@ -146,9 +161,28 @@
       }
     }
 
+    function updateShirtView() {
+      const color = document.getElementById('color').value;
+      const side = document.getElementById('side').value;
+      const base = {
+        white: {
+          front: 'https://i.ibb.co/MP2JqK5/white-front.png',
+          back: 'https://i.ibb.co/9whKWjR/white-back.png'
+        },
+        gray: {
+          front: 'https://i.ibb.co/9sR6RcK/gray-front.png',
+          back: 'https://i.ibb.co/gPVtyNM/gray-back.png'
+        },
+        black: {
+          front: 'https://i.ibb.co/0qmfvzK/black-front.png',
+          back: 'https://i.ibb.co/XJCVWhZ/black-back.png'
+        }
+      };
+      shirtImage.src = base[color][side];
+    }
+
     function updatePrintPosition() {
       const placement = document.getElementById('placement').value;
-      const print = document.getElementById('print-preview');
       switch (placement) {
         case 'center':
           print.style.top = '100px';
@@ -163,7 +197,7 @@
           print.style.left = '50%';
           break;
         case 'back':
-          print.style.top = '220px';
+          print.style.top = '180px';
           print.style.left = '50%';
           break;
       }
