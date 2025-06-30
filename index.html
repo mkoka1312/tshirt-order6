@@ -1,92 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Твоя идея — наша футболка</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    h1 {
-      font-size: 2.2rem;
-      margin: 0.5rem 0;
-    }
-    p {
-      color: #ccc;
-    }
-    form {
-      width: 100%;
-      max-width: 500px;
-      background: #111;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    }
-    label {
-      display: block;
-      margin-top: 1rem;
-      font-weight: bold;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 0.5rem;
-      border-radius: 8px;
-      border: none;
-      background: #222;
-      color: #fff;
-    }
-    button {
-      margin-top: 1.5rem;
-      padding: 12px;
-      width: 100%;
-      background: #00ffcc;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      color: #000;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #00ccaa;
-    }
-    .preview {
-      margin-top: 2rem;
-      position: relative;
-      width: 300px;
-    }
-    .preview img#shirt {
-      width: 100%;
-      display: block;
-    }
-    .preview img#print-preview {
-      position: absolute;
-      top: 100px;
-      left: 50%;
-      transform: translateX(-50%);
-      max-width: 140px;
-      max-height: 140px;
-      display: none;
-    }
-    footer {
-      margin-top: 3rem;
-      color: #666;
-      font-size: 0.9rem;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
@@ -137,7 +56,7 @@
   </form>
 
   <div class="preview">
-    <img id="shirt" src="https://i.ibb.co/MP2JqK5/white-front.png" alt="Футболка">
+    <img id="shirt" src="images/white-front.png" alt="Футболка">
     <img id="print-preview" alt="Принт превью">
   </div>
 
@@ -145,63 +64,6 @@
     &copy; 2025 Мой бренд. Все права защищены.
   </footer>
 
-  <script>
-    const shirtImage = document.getElementById('shirt');
-    const print = document.getElementById('print-preview');
-
-    function previewPrint(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          print.src = e.target.result;
-          print.style.display = 'block';
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    function updateShirtView() {
-      const color = document.getElementById('color').value;
-      const side = document.getElementById('side').value;
-      const base = {
-        white: {
-          front: 'https://i.ibb.co/MP2JqK5/white-front.png',
-          back: 'https://i.ibb.co/9whKWjR/white-back.png'
-        },
-        gray: {
-          front: 'https://i.ibb.co/9sR6RcK/gray-front.png',
-          back: 'https://i.ibb.co/gPVtyNM/gray-back.png'
-        },
-        black: {
-          front: 'https://i.ibb.co/0qmfvzK/black-front.png',
-          back: 'https://i.ibb.co/XJCVWhZ/black-back.png'
-        }
-      };
-      shirtImage.src = base[color][side];
-    }
-
-    function updatePrintPosition() {
-      const placement = document.getElementById('placement').value;
-      switch (placement) {
-        case 'center':
-          print.style.top = '100px';
-          print.style.left = '50%';
-          break;
-        case 'left':
-          print.style.top = '100px';
-          print.style.left = '35%';
-          break;
-        case 'top':
-          print.style.top = '60px';
-          print.style.left = '50%';
-          break;
-        case 'back':
-          print.style.top = '180px';
-          print.style.left = '50%';
-          break;
-      }
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
